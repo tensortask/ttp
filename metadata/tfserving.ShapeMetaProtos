@@ -1,0 +1,16 @@
+syntax = "proto3";
+package tfserving;
+option cc_enable_arenas = true;
+option java_outer_classname = "TFServingMetaProtos";
+option java_multiple_files = true;
+option java_package = "org.tensortask.ttp";
+/////////////////////////////////////////////////////
+// no imports
+/////////////////////////////////////////////////////
+// test metadata
+/////////////////////////////////////////////////////
+
+message ShapeMetaProtos {
+  repeated string name = 1;
+  bool unknown_rank = 2;
+};
