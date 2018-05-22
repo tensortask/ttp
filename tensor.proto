@@ -12,6 +12,7 @@ import "data_types.proto";
 // TensorProto implements the minimum neccessary
 // fields to convey a tensor across multiple protocols.
 // The contents of the tensor is explicitly a bytes
+// array.
 /////////////////////////////////////////////////////
 
 message TensorProto {

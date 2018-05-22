@@ -1,13 +1,14 @@
 syntax = "proto3";
-
 package ttp;
-
 option cc_enable_arenas = true;
-option java_outer_classname = "TensorShapeProtos";
+option java_outer_classname = "DataTypes";
 option java_multiple_files = true;
 option java_package = "org.tensortask.ttp";
-// end options
+/////////////////////////////////////////////////////
 import "google/protobuf/any.proto";
+/////////////////////////////////////////////////////
+// explaination
+/////////////////////////////////////////////////////
 
 // Dimensions of a tensor.
 message TensorShapeProto {

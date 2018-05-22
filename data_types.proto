@@ -5,7 +5,8 @@ option java_outer_classname = "DataTypes";
 option java_multiple_files = true;
 option java_package = "org.tensortask.ttp";
 /////////////////////////////////////////////////////
-
+// explaination
+/////////////////////////////////////////////////////
 enum DataType {
   // Not a legal value for DataType.  Used to indicate a DataType field
   // has not been set.
