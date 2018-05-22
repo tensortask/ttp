@@ -17,5 +17,9 @@ The goal of TTP is to create a standard minimum that enables basic conversion be
 
 ## Extensible Fields
 #### Metadata
-The metadata fields are implemented with Protocol Buffer(v3) **Any** types. This allows data to be added to the request, response and tensor fields on the fly or for a given use case. An example of useful metadat would be passing a model version number, or specifying a dimension label. 
+The metadata fields are implemented with Protocol Buffer(v3) **Any** types. This allows data to be added to the request, response and tensor fields on the fly or for a given use case. An example of useful metadat would be passing a model version number, or specifying a dimension label. Note:
+
+```
+http://ttp.tensortask.org/metadata/<ANY_DEFINITION.proto>
+```
 
