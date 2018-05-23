@@ -11,6 +11,6 @@ option java_package = "org.tensortask.ttp";
 /////////////////////////////////////////////////////
 
 message ShapeMetaProtos {
-  repeated string name = 1;
+  repeated string dimension_names = 1;
   bool unknown_rank = 2;
 };
