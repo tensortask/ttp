@@ -1,5 +1,6 @@
 syntax = "proto3";
 package ttp;
+option go_package = "github.com/tensortask/go-ttp";
 option cc_enable_arenas = true;
 option java_outer_classname = "DataTypes";
 option java_multiple_files = true;
