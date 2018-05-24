@@ -16,7 +16,7 @@ import "data_types.proto";
 /////////////////////////////////////////////////////
 
 message TensorProto {
-  Any metadata = 1;
+  google.protobuf.Any metadata = 1;
   DataType data_type = 2;
   TensorShapeProto tensor_shape = 3;
   bytes tensor_content = 4;
