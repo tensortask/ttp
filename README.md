@@ -1,7 +1,7 @@
 <img src="https://storage.googleapis.com/ttp-static/ttp_transparent.png" width="25%">
 
 # Tensor Transport Protocol (TTP)
-## A minimalist yet exstensible protocol for transmitting tensors.
+## A minimalist yet exstensible protocol for transporting tensors.
 
 The goal of TTP is to create a standard minimum that enables basic conversion between protocols while still providing use case dependent extensibility.
 
