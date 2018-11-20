@@ -1,17 +1,23 @@
 syntax = "proto3";
-package tfserving;
-option go_package = "github.com/tensortask/go-ttp";
+package ttp;
+option go_package = "github.com/tensortask/ttp";
 option cc_enable_arenas = true;
-option java_outer_classname = "TFServingMetaProtos";
+option java_outer_classname = "ttp";
 option java_multiple_files = true;
 option java_package = "org.tensortask.ttp";
 /////////////////////////////////////////////////////
-// no imports
+import "tensor.proto";
 /////////////////////////////////////////////////////
-// test metadata
+// explaination
 /////////////////////////////////////////////////////
 
-message ShapeMetaProtos {
-  repeated string dimension_names = 1;
-  bool unknown_rank = 2;
-};
+
+message Request {
+  string Target = 1;
+  map<string, Tensor> Inputs = 2;
+}
+
+message Response {
+  string Target = 1;
+  map<string, Tensor> Outputs = 2;
+}

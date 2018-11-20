@@ -1,14 +1,14 @@
 syntax = "proto3";
 package ttp;
-option go_package = "github.com/tensortask/go-ttp";
+option go_package = "github.com/tensortask/ttp";
 option cc_enable_arenas = true;
-option java_outer_classname = "DataTypes";
+option java_outer_classname = "ttp";
 option java_multiple_files = true;
 option java_package = "org.tensortask.ttp";
 /////////////////////////////////////////////////////
 // explaination
 /////////////////////////////////////////////////////
-enum DataType {
+enum Type {
   // Not a legal value for DataType.  Used to indicate a DataType field
   // has not been set.
   INVALID = 0;

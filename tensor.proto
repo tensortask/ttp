@@ -1,14 +1,12 @@
 syntax = "proto3";
 package ttp;
-option go_package = "github.com/tensortask/go-ttp";
+option go_package = "github.com/tensortask/ttp";
 option cc_enable_arenas = true;
-option java_outer_classname = "DataTypes";
+option java_outer_classname = "ttp";
 option java_multiple_files = true;
 option java_package = "org.tensortask.ttp";
 /////////////////////////////////////////////////////
-import "google/protobuf/any.proto";
-import "ttp/tensor_shape.proto";
-import "ttp/data_types.proto";
+import "type.proto";
 /////////////////////////////////////////////////////
 // TensorProto implements the minimum neccessary
 // fields to convey a tensor across multiple protocols.
@@ -16,9 +14,8 @@ import "ttp/data_types.proto";
 // array.
 /////////////////////////////////////////////////////
 
-message TensorProto {
-  google.protobuf.Any metadata = 1;
-  DataType data_type = 2;
-  TensorShapeProto tensor_shape = 3;
-  bytes tensor_content = 4;
+message Tensor {
+  Type Type = 1;
+  repeated int64 Dim = 2;
+  bytes Contents = 3;
 };
