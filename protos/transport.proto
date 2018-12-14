@@ -1,0 +1,30 @@
+syntax = "proto3";
+/////////////////////////////////////////////////////
+// Package Name
+/////////////////////////////////////////////////////
+package ttp;
+/////////////////////////////////////////////////////
+// Imports and GoGo Options
+/////////////////////////////////////////////////////
+import "tensor.proto";
+import "gogo/protobuf/gogoproto/gogo.proto";
+/////////////////////////////////////////////////////
+option (gogoproto.equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.gostring_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+/////////////////////////////////////////////////////
+// explaination
+/////////////////////////////////////////////////////
+
+message Transport {
+  string Target = 1;
+  map<string, Tensor> Tensors = 2;
+  map<string, bytes> MetaData = 3;
+}
