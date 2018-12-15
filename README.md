@@ -21,7 +21,7 @@ The goal of TTP is to create a standard minimum that enables basic conversion be
 ### Per Tensor
 * Data Type (data type for the given tensor)
 * Tensor Dimensions (dimensionality of the given tensor)
-* Tensor Contents (raw bytes)
+* Tensor Contents (raw bytes using C-standard for packing a multidim array)
 
 ## Generate Protobuffers
 
