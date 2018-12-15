@@ -109,16 +109,16 @@ func (x Type) String() string {
 	return proto.EnumName(Type_name, int32(x))
 }
 func (Type) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_type_86743f1f85f5c56d, []int{0}
+	return fileDescriptor_type_7aa6d54c6dc224d9, []int{0}
 }
 
 func init() {
 	proto.RegisterEnum("ttp.Type", Type_name, Type_value)
 }
 
-func init() { proto.RegisterFile("type.proto", fileDescriptor_type_86743f1f85f5c56d) }
+func init() { proto.RegisterFile("type.proto", fileDescriptor_type_7aa6d54c6dc224d9) }
 
-var fileDescriptor_type_86743f1f85f5c56d = []byte{
+var fileDescriptor_type_7aa6d54c6dc224d9 = []byte{
 	// 303 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x34, 0x90, 0xbd, 0x4e, 0xc3, 0x30,
 	0x14, 0x85, 0xeb, 0x36, 0x4d, 0x93, 0xdb, 0x1f, 0x2e, 0x46, 0x02, 0x89, 0xc1, 0x03, 0x23, 0x42,

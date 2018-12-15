@@ -8,7 +8,7 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/tensortask/boltz/internal/log"
+	"github.com/rs/zerolog/log"
 )
 
 var (

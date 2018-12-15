@@ -18,6 +18,7 @@ import bytes "bytes"
 
 import strings "strings"
 import reflect "reflect"
+import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
 import io "io"
 
@@ -33,17 +34,18 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Tensor struct {
-	Type                 Type     `protobuf:"varint,1,opt,name=Type,proto3,enum=ttp.Type" json:"Type,omitempty"`
-	Dim                  []int64  `protobuf:"varint,2,rep,packed,name=Dim" json:"Dim,omitempty"`
-	Contents             []byte   `protobuf:"bytes,3,opt,name=Contents,proto3" json:"Contents,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Type                 Type              `protobuf:"varint,1,opt,name=Type,proto3,enum=ttp.Type" json:"Type,omitempty"`
+	Dim                  []int64           `protobuf:"varint,2,rep,packed,name=Dim" json:"Dim,omitempty"`
+	Contents             []byte            `protobuf:"bytes,3,opt,name=Contents,proto3" json:"Contents,omitempty"`
+	Metadata             map[string][]byte `protobuf:"bytes,4,rep,name=Metadata" json:"Metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
 }
 
 func (m *Tensor) Reset()      { *m = Tensor{} }
 func (*Tensor) ProtoMessage() {}
 func (*Tensor) Descriptor() ([]byte, []int) {
-	return fileDescriptor_tensor_d03b4e5395e49f1a, []int{0}
+	return fileDescriptor_tensor_e161aa9d8ea15caf, []int{0}
 }
 func (m *Tensor) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -93,8 +95,16 @@ func (m *Tensor) GetContents() []byte {
 	return nil
 }
 
+func (m *Tensor) GetMetadata() map[string][]byte {
+	if m != nil {
+		return m.Metadata
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*Tensor)(nil), "ttp.Tensor")
+	proto.RegisterMapType((map[string][]byte)(nil), "ttp.Tensor.MetadataEntry")
 }
 func (this *Tensor) VerboseEqual(that interface{}) error {
 	if that == nil {
@@ -135,6 +145,14 @@ func (this *Tensor) VerboseEqual(that interface{}) error {
 	if !bytes.Equal(this.Contents, that1.Contents) {
 		return fmt.Errorf("Contents this(%v) Not Equal that(%v)", this.Contents, that1.Contents)
 	}
+	if len(this.Metadata) != len(that1.Metadata) {
+		return fmt.Errorf("Metadata this(%v) Not Equal that(%v)", len(this.Metadata), len(that1.Metadata))
+	}
+	for i := range this.Metadata {
+		if !bytes.Equal(this.Metadata[i], that1.Metadata[i]) {
+			return fmt.Errorf("Metadata this[%v](%v) Not Equal that[%v](%v)", i, this.Metadata[i], i, that1.Metadata[i])
+		}
+	}
 	return nil
 }
 func (this *Tensor) Equal(that interface{}) bool {
@@ -170,17 +188,38 @@ func (this *Tensor) Equal(that interface{}) bool {
 	if !bytes.Equal(this.Contents, that1.Contents) {
 		return false
 	}
+	if len(this.Metadata) != len(that1.Metadata) {
+		return false
+	}
+	for i := range this.Metadata {
+		if !bytes.Equal(this.Metadata[i], that1.Metadata[i]) {
+			return false
+		}
+	}
 	return true
 }
 func (this *Tensor) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 7)
+	s := make([]string, 0, 8)
 	s = append(s, "&ttp.Tensor{")
 	s = append(s, "Type: "+fmt.Sprintf("%#v", this.Type)+",\n")
 	s = append(s, "Dim: "+fmt.Sprintf("%#v", this.Dim)+",\n")
 	s = append(s, "Contents: "+fmt.Sprintf("%#v", this.Contents)+",\n")
+	keysForMetadata := make([]string, 0, len(this.Metadata))
+	for k, _ := range this.Metadata {
+		keysForMetadata = append(keysForMetadata, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForMetadata)
+	mapStringForMetadata := "map[string][]byte{"
+	for _, k := range keysForMetadata {
+		mapStringForMetadata += fmt.Sprintf("%#v: %#v,", k, this.Metadata[k])
+	}
+	mapStringForMetadata += "}"
+	if this.Metadata != nil {
+		s = append(s, "Metadata: "+mapStringForMetadata+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -236,6 +275,29 @@ func (m *Tensor) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintTensor(dAtA, i, uint64(len(m.Contents)))
 		i += copy(dAtA[i:], m.Contents)
 	}
+	if len(m.Metadata) > 0 {
+		for k, _ := range m.Metadata {
+			dAtA[i] = 0x22
+			i++
+			v := m.Metadata[k]
+			byteSize := 0
+			if len(v) > 0 {
+				byteSize = 1 + len(v) + sovTensor(uint64(len(v)))
+			}
+			mapSize := 1 + len(k) + sovTensor(uint64(len(k))) + byteSize
+			i = encodeVarintTensor(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintTensor(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			if len(v) > 0 {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintTensor(dAtA, i, uint64(len(v)))
+				i += copy(dAtA[i:], v)
+			}
+		}
+	}
 	return i, nil
 }
 
@@ -264,6 +326,18 @@ func NewPopulatedTensor(r randyTensor, easy bool) *Tensor {
 	for i := 0; i < v2; i++ {
 		this.Contents[i] = byte(r.Intn(256))
 	}
+	if r.Intn(10) != 0 {
+		v3 := r.Intn(10)
+		this.Metadata = make(map[string][]byte)
+		for i := 0; i < v3; i++ {
+			v4 := r.Intn(100)
+			v5 := randStringTensor(r)
+			this.Metadata[v5] = make([]byte, v4)
+			for i := 0; i < v4; i++ {
+				this.Metadata[v5][i] = byte(r.Intn(256))
+			}
+		}
+	}
 	if !easy && r.Intn(10) != 0 {
 	}
 	return this
@@ -288,9 +362,9 @@ func randUTF8RuneTensor(r randyTensor) rune {
 	return rune(ru + 61)
 }
 func randStringTensor(r randyTensor) string {
-	v3 := r.Intn(100)
-	tmps := make([]rune, v3)
-	for i := 0; i < v3; i++ {
+	v6 := r.Intn(100)
+	tmps := make([]rune, v6)
+	for i := 0; i < v6; i++ {
 		tmps[i] = randUTF8RuneTensor(r)
 	}
 	return string(tmps)
@@ -312,11 +386,11 @@ func randFieldTensor(dAtA []byte, r randyTensor, fieldNumber int, wire int) []by
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateTensor(dAtA, uint64(key))
-		v4 := r.Int63()
+		v7 := r.Int63()
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			v7 *= -1
 		}
-		dAtA = encodeVarintPopulateTensor(dAtA, uint64(v4))
+		dAtA = encodeVarintPopulateTensor(dAtA, uint64(v7))
 	case 1:
 		dAtA = encodeVarintPopulateTensor(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -358,6 +432,18 @@ func (m *Tensor) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTensor(uint64(l))
 	}
+	if len(m.Metadata) > 0 {
+		for k, v := range m.Metadata {
+			_ = k
+			_ = v
+			l = 0
+			if len(v) > 0 {
+				l = 1 + len(v) + sovTensor(uint64(len(v)))
+			}
+			mapEntrySize := 1 + len(k) + sovTensor(uint64(len(k))) + l
+			n += mapEntrySize + 1 + sovTensor(uint64(mapEntrySize))
+		}
+	}
 	return n
 }
 
@@ -378,10 +464,21 @@ func (this *Tensor) String() string {
 	if this == nil {
 		return "nil"
 	}
+	keysForMetadata := make([]string, 0, len(this.Metadata))
+	for k, _ := range this.Metadata {
+		keysForMetadata = append(keysForMetadata, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForMetadata)
+	mapStringForMetadata := "map[string][]byte{"
+	for _, k := range keysForMetadata {
+		mapStringForMetadata += fmt.Sprintf("%v: %v,", k, this.Metadata[k])
+	}
+	mapStringForMetadata += "}"
 	s := strings.Join([]string{`&Tensor{`,
 		`Type:` + fmt.Sprintf("%v", this.Type) + `,`,
 		`Dim:` + fmt.Sprintf("%v", this.Dim) + `,`,
 		`Contents:` + fmt.Sprintf("%v", this.Contents) + `,`,
+		`Metadata:` + mapStringForMetadata + `,`,
 		`}`,
 	}, "")
 	return s
@@ -535,6 +632,125 @@ func (m *Tensor) Unmarshal(dAtA []byte) error {
 				m.Contents = []byte{}
 			}
 			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Metadata", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTensor
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTensor
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Metadata == nil {
+				m.Metadata = make(map[string][]byte)
+			}
+			var mapkey string
+			mapvalue := []byte{}
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowTensor
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					var stringLenmapkey uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTensor
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						stringLenmapkey |= (uint64(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					intStringLenmapkey := int(stringLenmapkey)
+					if intStringLenmapkey < 0 {
+						return ErrInvalidLengthTensor
+					}
+					postStringIndexmapkey := iNdEx + intStringLenmapkey
+					if postStringIndexmapkey > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
+					iNdEx = postStringIndexmapkey
+				} else if fieldNum == 2 {
+					var mapbyteLen uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowTensor
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapbyteLen |= (uint64(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					intMapbyteLen := int(mapbyteLen)
+					if intMapbyteLen < 0 {
+						return ErrInvalidLengthTensor
+					}
+					postbytesIndex := iNdEx + intMapbyteLen
+					if postbytesIndex > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapvalue = make([]byte, mapbyteLen)
+					copy(mapvalue, dAtA[iNdEx:postbytesIndex])
+					iNdEx = postbytesIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipTensor(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthTensor
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
+				}
+			}
+			m.Metadata[mapkey] = mapvalue
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTensor(dAtA[iNdEx:])
@@ -661,21 +877,25 @@ var (
 	ErrIntOverflowTensor   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("tensor.proto", fileDescriptor_tensor_d03b4e5395e49f1a) }
+func init() { proto.RegisterFile("tensor.proto", fileDescriptor_tensor_e161aa9d8ea15caf) }
 
-var fileDescriptor_tensor_d03b4e5395e49f1a = []byte{
-	// 194 bytes of a gzipped FileDescriptorProto
+var fileDescriptor_tensor_e161aa9d8ea15caf = []byte{
+	// 266 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x29, 0x49, 0xcd, 0x2b,
 	0xce, 0x2f, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x2e, 0x29, 0x29, 0x90, 0xe2, 0x2a,
 	0xa9, 0x2c, 0x48, 0x85, 0x08, 0x48, 0x29, 0xa5, 0xe7, 0xa7, 0xe7, 0xeb, 0x83, 0xd9, 0x49, 0xa5,
-	0x69, 0xfa, 0x20, 0x1e, 0x98, 0x03, 0x66, 0x41, 0xd4, 0x28, 0x85, 0x72, 0xb1, 0x85, 0x80, 0x0d,
-	0x11, 0x92, 0xe5, 0x62, 0x09, 0xa9, 0x2c, 0x48, 0x95, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x33, 0xe2,
-	0xd4, 0x2b, 0x29, 0x29, 0xd0, 0x03, 0x09, 0x04, 0x81, 0x85, 0x85, 0x04, 0xb8, 0x98, 0x5d, 0x32,
-	0x73, 0x25, 0x98, 0x14, 0x98, 0x35, 0x98, 0x83, 0x40, 0x4c, 0x21, 0x29, 0x2e, 0x0e, 0xe7, 0xfc,
-	0xbc, 0x92, 0xd4, 0xbc, 0x92, 0x62, 0x09, 0x66, 0x05, 0x46, 0x0d, 0x9e, 0x20, 0x38, 0xdf, 0x49,
-	0xe7, 0xc6, 0x43, 0x39, 0x86, 0x07, 0x0f, 0xe5, 0x18, 0x3f, 0x3c, 0x94, 0x63, 0xfc, 0xf1, 0x50,
-	0x8e, 0xb1, 0xe1, 0x91, 0x1c, 0xe3, 0x8a, 0x47, 0x72, 0x8c, 0x3b, 0x1e, 0xc9, 0x31, 0x9e, 0x78,
-	0x24, 0xc7, 0x78, 0xe1, 0x91, 0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c, 0x13, 0x1e, 0xcb, 0x31, 0x24,
-	0xb1, 0x81, 0xdd, 0x62, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0x3c, 0xee, 0x0b, 0x93, 0xd0, 0x00,
-	0x00, 0x00,
+	0x69, 0xfa, 0x20, 0x1e, 0x98, 0x03, 0x66, 0x41, 0xd4, 0x28, 0x9d, 0x64, 0xe4, 0x62, 0x0b, 0x01,
+	0x9b, 0x22, 0x24, 0xcb, 0xc5, 0x12, 0x52, 0x59, 0x90, 0x2a, 0xc1, 0xa8, 0xc0, 0xa8, 0xc1, 0x67,
+	0xc4, 0xa9, 0x57, 0x52, 0x52, 0xa0, 0x07, 0x12, 0x08, 0x02, 0x0b, 0x0b, 0x09, 0x70, 0x31, 0xbb,
+	0x64, 0xe6, 0x4a, 0x30, 0x29, 0x30, 0x6b, 0x30, 0x07, 0x81, 0x98, 0x42, 0x52, 0x5c, 0x1c, 0xce,
+	0xf9, 0x79, 0x25, 0xa9, 0x79, 0x25, 0xc5, 0x12, 0xcc, 0x0a, 0x8c, 0x1a, 0x3c, 0x41, 0x70, 0xbe,
+	0x90, 0x29, 0x17, 0x87, 0x6f, 0x6a, 0x49, 0x62, 0x4a, 0x62, 0x49, 0xa2, 0x04, 0x8b, 0x02, 0xb3,
+	0x06, 0xb7, 0x91, 0x24, 0xc4, 0x40, 0x88, 0x8b, 0x61, 0x72, 0xae, 0x79, 0x25, 0x45, 0x95, 0x41,
+	0x70, 0xa5, 0x52, 0xd6, 0x5c, 0xbc, 0x28, 0x52, 0x20, 0x5b, 0xb3, 0x53, 0x2b, 0xc1, 0x6e, 0xe2,
+	0x0c, 0x02, 0x31, 0x85, 0x44, 0xb8, 0x58, 0xcb, 0x12, 0x73, 0x4a, 0x53, 0x25, 0x98, 0xc0, 0x56,
+	0x42, 0x38, 0x56, 0x4c, 0x16, 0x8c, 0x4e, 0x3a, 0x37, 0x1e, 0xca, 0x31, 0x3c, 0x78, 0x28, 0xc7,
+	0xf8, 0xe1, 0xa1, 0x1c, 0xe3, 0x8f, 0x87, 0x72, 0x8c, 0x0d, 0x8f, 0xe4, 0x18, 0x57, 0x3c, 0x92,
+	0x63, 0xdc, 0xf1, 0x48, 0x8e, 0xf1, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f, 0x3c,
+	0x92, 0x63, 0x9c, 0xf0, 0x58, 0x8e, 0x21, 0x89, 0x0d, 0x1c, 0x00, 0xc6, 0x80, 0x00, 0x00, 0x00,
+	0xff, 0xff, 0xdf, 0xc0, 0x29, 0xed, 0x45, 0x01, 0x00, 0x00,
 }

@@ -44,7 +44,7 @@ type Transport struct {
 func (m *Transport) Reset()      { *m = Transport{} }
 func (*Transport) ProtoMessage() {}
 func (*Transport) Descriptor() ([]byte, []int) {
-	return fileDescriptor_transport_37a7ab029409a9a7, []int{0}
+	return fileDescriptor_transport_f9c11b3a59da8fe6, []int{0}
 }
 func (m *Transport) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -926,9 +926,9 @@ var (
 	ErrIntOverflowTransport   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("transport.proto", fileDescriptor_transport_37a7ab029409a9a7) }
+func init() { proto.RegisterFile("transport.proto", fileDescriptor_transport_f9c11b3a59da8fe6) }
 
-var fileDescriptor_transport_37a7ab029409a9a7 = []byte{
+var fileDescriptor_transport_f9c11b3a59da8fe6 = []byte{
 	// 276 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2f, 0x29, 0x4a, 0xcc,
 	0x2b, 0x2e, 0xc8, 0x2f, 0x2a, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x2e, 0x29, 0x29,
