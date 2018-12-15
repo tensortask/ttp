@@ -20,7 +20,18 @@ option (gogoproto.verbose_equal_all) = true;
 option (gogoproto.populate_all) = true;
 option (gogoproto.testgen_all) = true;
 /////////////////////////////////////////////////////
-// explaination
+// Transport is a group of tensors to be sent over the
+// wire.
+//
+// The transport message includes a target which
+// is a destination (address/id) and target computation.
+// 
+// The Tensors field is a map of tensor alias' and the
+// corresponding tensor information
+// (type, dim, contents, tensor-specific metadata)
+//
+// Metadata is any other additional use-case specific
+// information. This could be a UUID or encryption nonce.
 /////////////////////////////////////////////////////
 
 message Transport {

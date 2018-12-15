@@ -19,7 +19,9 @@ option (gogoproto.verbose_equal_all) = true;
 option (gogoproto.populate_all) = true;
 option (gogoproto.testgen_all) = true;
 /////////////////////////////////////////////////////
-// explaination
+// Type is an enum selector which allows ONE data type
+// to be used.
+// Currently supports all TensorFlow data types.
 /////////////////////////////////////////////////////
 
 enum Type {
