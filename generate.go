@@ -17,7 +17,7 @@ var (
 
 func main() {
 	if err := generateProtos(); err != nil {
-		fmt.Printf("%+v", err)
+		log.Error().Err(err).Msg("Compilation error.")
 	}
 }
 
@@ -33,6 +33,7 @@ func generateProtos() error {
 		"type.proto",
 	}
 	cmd := exec.Command("protoc", args...)
+	fmt.Println(cmd)
 	err := cmd.Run()
 	if err != nil {
 		return err
