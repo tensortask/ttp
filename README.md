@@ -7,8 +7,8 @@
 
 [1]: https://godoc.org/github.com/tensortask/ttp/gen?status.svg
 [2]: https://godoc.org/github.com/tensortask/ttp/gen
-[3]: https://goreportcard.com/badge/github.com/tensortask/ttp/gen
-[4]: https://goreportcard.com/report/github.com/tensortask/ttp/gen
+[3]: https://goreportcard.com/badge/github.com/tensortask/ttp
+[4]: https://goreportcard.com/report/github.com/tensortask/ttp
 [5]: https://img.shields.io/badge/keybase%20chat-tensortask.public-blue.svg
 [6]: https://keybase.io/team/tensortask.public
 
