@@ -1,4 +1,7 @@
-<img src="https://storage.googleapis.com/ttp-static/ttp_transparent.png" width="25%">
+<p align="center">
+  <img src="https://storage.googleapis.com/ttp-static/ttp_transparent.png" width="200">
+</p>
+
 
 [![GoDoc][1]][2] [![Go Report Card][3]][4] [![Keybase Chat][5]][6]
 
