@@ -25,6 +25,9 @@ TTP is inspired from the methods employed by TensorFlow Serving and distributed 
 * Tensor Dimensions (dimensionality of the given tensor)
 * Tensor Contents (raw bytes using C-standard for packing a multidim array)
 
+## gRPC Support
+TTP is defined with protocol buffers which means they directly support gRPC. Simply import the TTP definitions within your service definition.
+
 ## JSON Support
 Protocol Buffers automatically maps to JSON and vice versa. Examples of standard and extended JSON tensors transports are on the way!
 
