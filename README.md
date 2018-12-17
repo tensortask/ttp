@@ -24,7 +24,7 @@ TTP is inspired from the methods employed by TensorFlow Serving and distributed 
 * Map of Alias' and Tensors (alias -> tensor)
 * Metadata Map (name -> byte array)
 ### Per Tensor
-* Data Type (data type for the given tensor)
+* Data Type (data type of the given tensor)
 * Tensor Dimensions (dimensionality of the given tensor)
 * Tensor Contents (raw bytes using C-standard for packing a multidim array)
 * Metadata Map (name -> byte array)
