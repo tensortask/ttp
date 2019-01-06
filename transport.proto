@@ -1,0 +1,36 @@
+syntax = "proto3";
+/////////////////////////////////////////////////////
+// Package Name
+/////////////////////////////////////////////////////
+package ttp;
+/////////////////////////////////////////////////////
+// Imports
+/////////////////////////////////////////////////////
+import "tensor.proto";
+/////////////////////////////////////////////////////
+// Proto Options
+/////////////////////////////////////////////////////
+option cc_enable_arenas = true;
+option java_outer_classname = "TransportProtos";
+option java_multiple_files = true;
+option java_package = "com.tensortask.ttp";
+/////////////////////////////////////////////////////
+// Transport is a group of tensors to be sent over the
+// wire.
+//
+// The transport message includes a target which
+// is a destination (address/id) and target computation.
+// 
+// The Tensors field is a map of tensor alias' and the
+// corresponding tensor information
+// (type, dim, contents, tensor-specific metadata)
+//
+// Metadata is any other additional use-case specific
+// information. This could be a UUID or encryption nonce.
+/////////////////////////////////////////////////////
+
+message Transport {
+  string Target = 1;
+  map<string, Tensor> Tensors = 2;
+  map<string, bytes> MetaData = 3;
+}

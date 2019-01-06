@@ -1,0 +1,47 @@
+syntax = "proto3";
+/////////////////////////////////////////////////////
+// Package Name
+/////////////////////////////////////////////////////
+package ttp;
+/////////////////////////////////////////////////////
+// Proto Options
+/////////////////////////////////////////////////////
+option cc_enable_arenas = true;
+option java_outer_classname = "TypeEnum";
+option java_multiple_files = true;
+option java_package = "com.tensortask.ttp";
+/////////////////////////////////////////////////////
+// Type is an enum selector which allows ONE data type
+// to be used.
+// Currently supports all TensorFlow data types.
+/////////////////////////////////////////////////////
+
+enum Type {
+  // Not a legal value for DataType.  Used to indicate a DataType field
+  // has not been set.
+  INVALID = 0;
+
+  // Data types that all computation devices are expected to be
+  // capable to support.
+  FLOAT = 1;
+  DOUBLE = 2;
+  INT32 = 3;
+  UINT8 = 4;
+  INT16 = 5;
+  INT8 = 6;
+  STRING = 7;
+  COMPLEX64 = 8;  // Single-precision complex
+  INT64 = 9;
+  BOOL = 10;
+  QINT8 = 11;     // Quantized int8
+  QUINT8 = 12;    // Quantized uint8
+  QINT32 = 13;    // Quantized int32
+  BFLOAT16 = 14;  // Float32 truncated to 16 bits.  Only for cast ops.
+  QINT16 = 15;    // Quantized int16
+  QUINT16 = 16;   // Quantized uint16
+  UINT16 = 17;
+  COMPLEX128 = 18;  // Double-precision complex
+  HALF = 19;
+  UINT32 = 22;
+  UINT64 = 23;
+}

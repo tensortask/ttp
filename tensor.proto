@@ -1,0 +1,37 @@
+syntax = "proto3";
+/////////////////////////////////////////////////////
+// Package Name
+/////////////////////////////////////////////////////
+package ttp;
+/////////////////////////////////////////////////////
+// Imports
+/////////////////////////////////////////////////////
+import "type.proto";
+/////////////////////////////////////////////////////
+// Proto Options
+/////////////////////////////////////////////////////
+option cc_enable_arenas = true;
+option java_outer_classname = "TensorProtos";
+option java_multiple_files = true;
+option java_package = "com.tensortask.ttp";
+/////////////////////////////////////////////////////
+// Tensor is a generalized placeholder for Tensors.
+// 
+// Data type: TF supported data types
+// (used when transcoding between different
+// protocols/language specific types).
+//
+// Dimensions: dimensions of the tensor from outside in.
+// 
+// Contents: bytes (using C standard for packing multidim arrays)
+//
+// Metadata: any additional keyed values (e.g. dimension labels).
+// Metadata is use-case specific.
+/////////////////////////////////////////////////////
+
+message Tensor {
+  Type Type = 1;
+  repeated int64 Dim = 2;
+  bytes Contents = 3;
+  map<string, bytes> Metadata = 4;
+};
