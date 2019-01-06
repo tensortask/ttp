@@ -37,7 +37,6 @@ func generateProtos() error {
 		"type.proto",
 	}
 	cmd := exec.Command("protoc", args...)
-	fmt.Println(cmd)
 	err = cmd.Run()
 	if err != nil {
 		return err
