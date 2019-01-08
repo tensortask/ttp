@@ -49,4 +49,4 @@ go get -u github.com/gogo/protobuf/protoc-gen-gogofaster
 go generate ./...
 ```
 
-or simply import `github.com/tensortask/ttp/gen`.
+or simply import `github.com/tensortask/ttp/go`.
