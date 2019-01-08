@@ -5,8 +5,8 @@
 
 [![GoDoc][1]][2] [![Go Report Card][3]][4] [![Keybase Chat][5]][6]
 
-[1]: https://godoc.org/github.com/tensortask/ttp/gen?status.svg
-[2]: https://godoc.org/github.com/tensortask/ttp/gen
+[1]: https://godoc.org/github.com/tensortask/ttp/go?status.svg
+[2]: https://godoc.org/github.com/tensortask/ttp/go
 [3]: https://goreportcard.com/badge/github.com/tensortask/ttp
 [4]: https://goreportcard.com/report/github.com/tensortask/ttp
 [5]: https://img.shields.io/badge/keybase%20chat-tensortask.public-blue.svg
