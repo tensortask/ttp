@@ -1,23 +1,12 @@
+// Proto Syntax:
 syntax = "proto3";
-/////////////////////////////////////////////////////
-// Package Name
-/////////////////////////////////////////////////////
+// Package Name:
 package ttp;
-/////////////////////////////////////////////////////
-// Imports
-/////////////////////////////////////////////////////
+// Imports:
 import "tensor.proto";
+import "version.proto";
 import "gogo/protobuf/gogoproto/gogo.proto";
-/////////////////////////////////////////////////////
-// Proto Options
-/////////////////////////////////////////////////////
-option cc_enable_arenas = true;
-option java_outer_classname = "TransportProtos";
-option java_multiple_files = true;
-option java_package = "com.tensortask.ttp";
-/////////////////////////////////////////////////////
-// GoGo Proto Options (Golang optimizations)
-/////////////////////////////////////////////////////
+// GoGo Proto Options (Golang optimizations):
 option (gogoproto.equal_all) = true;
 option (gogoproto.goproto_stringer_all) = false;
 option (gogoproto.gostring_all) = true;
@@ -28,7 +17,8 @@ option (gogoproto.unmarshaler_all) = true;
 option (gogoproto.verbose_equal_all) = true;
 option (gogoproto.populate_all) = true;
 option (gogoproto.testgen_all) = true;
-/////////////////////////////////////////////////////
+// Description: 
+// 
 // Transport is a group of tensors to be sent over the
 // wire.
 //
@@ -41,10 +31,10 @@ option (gogoproto.testgen_all) = true;
 //
 // Metadata is any other additional use-case specific
 // information. This could be a UUID or encryption nonce.
-/////////////////////////////////////////////////////
 
 message Transport {
   string Target = 1;
   map<string, Tensor> Tensors = 2;
   map<string, bytes> MetaData = 3;
+  Version Version = 4;
 }

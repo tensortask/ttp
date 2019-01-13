@@ -1,22 +1,10 @@
+// Proto Syntax:
 syntax = "proto3";
-/////////////////////////////////////////////////////
-// Package Name
-/////////////////////////////////////////////////////
+// Package Name: 
 package ttp;
-/////////////////////////////////////////////////////
-// Imports
-/////////////////////////////////////////////////////
+// Imports: 
 import "gogo/protobuf/gogoproto/gogo.proto";
-/////////////////////////////////////////////////////
-// Proto Options
-/////////////////////////////////////////////////////
-option cc_enable_arenas = true;
-option java_outer_classname = "TypeEnum";
-option java_multiple_files = true;
-option java_package = "com.tensortask.ttp";
-/////////////////////////////////////////////////////
-// GoGo Proto Options (Golang optimizations)
-/////////////////////////////////////////////////////
+// GoGo Proto Options (Golang optimizations):
 option (gogoproto.equal_all) = true;
 option (gogoproto.goproto_stringer_all) = false;
 option (gogoproto.gostring_all) = true;
@@ -27,11 +15,10 @@ option (gogoproto.unmarshaler_all) = true;
 option (gogoproto.verbose_equal_all) = true;
 option (gogoproto.populate_all) = true;
 option (gogoproto.testgen_all) = true;
-/////////////////////////////////////////////////////
+// Description:
 // Type is an enum selector which allows ONE data type
-// to be used.
-// Currently supports all TensorFlow data types.
-/////////////////////////////////////////////////////
+// to be used. Currently supports all TensorFlow data types.
+
 
 enum Type {
   // Not a legal value for DataType.  Used to indicate a DataType field

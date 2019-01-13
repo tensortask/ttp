@@ -1,20 +1,15 @@
+// Proto Syntax:
 syntax = "proto3";
-/////////////////////////////////////////////////////
-// Package Name
-/////////////////////////////////////////////////////
+// Package Name:
 package ttp;
-/////////////////////////////////////////////////////
-// Imports
-/////////////////////////////////////////////////////
+// Imports:
 import "type.proto";
-/////////////////////////////////////////////////////
-// Proto Options
-/////////////////////////////////////////////////////
+// Proto Options:
 option cc_enable_arenas = true;
 option java_outer_classname = "TensorProtos";
 option java_multiple_files = true;
 option java_package = "com.tensortask.ttp";
-/////////////////////////////////////////////////////
+// Description:
 // Tensor is a generalized placeholder for Tensors.
 // 
 // Data type: TF supported data types
@@ -27,7 +22,6 @@ option java_package = "com.tensortask.ttp";
 //
 // Metadata: any additional keyed values (e.g. dimension labels).
 // Metadata is use-case specific.
-/////////////////////////////////////////////////////
 
 message Tensor {
   Type Type = 1;

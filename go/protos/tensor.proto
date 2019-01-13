@@ -1,23 +1,11 @@
+// Proto Syntax:
 syntax = "proto3";
-/////////////////////////////////////////////////////
-// Package Name
-/////////////////////////////////////////////////////
+// Package Name:
 package ttp;
-/////////////////////////////////////////////////////
-// Imports
-/////////////////////////////////////////////////////
+// Imports:
 import "type.proto";
 import "gogo/protobuf/gogoproto/gogo.proto";
-/////////////////////////////////////////////////////
-// Proto Options
-/////////////////////////////////////////////////////
-option cc_enable_arenas = true;
-option java_outer_classname = "TensorProtos";
-option java_multiple_files = true;
-option java_package = "com.tensortask.ttp";
-/////////////////////////////////////////////////////
-// GoGo Proto Options (Golang optimizations)
-/////////////////////////////////////////////////////
+// GoGo Proto Options (Golang optimizations):
 option (gogoproto.equal_all) = true;
 option (gogoproto.goproto_stringer_all) = false;
 option (gogoproto.gostring_all) = true;
@@ -28,7 +16,8 @@ option (gogoproto.unmarshaler_all) = true;
 option (gogoproto.verbose_equal_all) = true;
 option (gogoproto.populate_all) = true;
 option (gogoproto.testgen_all) = true;
-/////////////////////////////////////////////////////
+// Description: 
+// 
 // Tensor is a generalized placeholder for Tensors.
 // 
 // Data type: TF supported data types
@@ -41,7 +30,6 @@ option (gogoproto.testgen_all) = true;
 //
 // Metadata: any additional keyed values (e.g. dimension labels).
 // Metadata is use-case specific.
-/////////////////////////////////////////////////////
 
 message Tensor {
   Type Type = 1;

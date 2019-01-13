@@ -35,6 +35,7 @@ func generateProtos() error {
 		"tensor.proto",
 		"transport.proto",
 		"type.proto",
+		"version.proto",
 	}
 	cmd := exec.Command("protoc", args...)
 	err = cmd.Run()

@@ -1,20 +1,17 @@
+// Proto Syntax:
 syntax = "proto3";
-/////////////////////////////////////////////////////
-// Package Name
-/////////////////////////////////////////////////////
+// Package Name:
 package ttp;
-/////////////////////////////////////////////////////
-// Proto Options
-/////////////////////////////////////////////////////
+// Proto Options:
 option cc_enable_arenas = true;
 option java_outer_classname = "TypeEnum";
 option java_multiple_files = true;
 option java_package = "com.tensortask.ttp";
-/////////////////////////////////////////////////////
+// Description:
+// 
 // Type is an enum selector which allows ONE data type
 // to be used.
 // Currently supports all TensorFlow data types.
-/////////////////////////////////////////////////////
 
 enum Type {
   // Not a legal value for DataType.  Used to indicate a DataType field
